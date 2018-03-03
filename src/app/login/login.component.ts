@@ -37,8 +37,13 @@ export class LoginComponent implements OnInit {
         resolve(data);
         resolve(res.json());
         resolve(this.router.navigateByUrl('/'))
+        console.log(res.json());
       }, (err) => {
         this.error = err;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        setTimeout(function () {
+          this.error = null;
+        }.bind(this), 3000);
         reject(err);
       })
     })

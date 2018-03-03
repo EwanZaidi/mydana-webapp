@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
   baseUrl = 'https://mydana.herokuapp.com/api/';
   token;
   success:Boolean=false;
+  error;
 
   constructor(private http: Http, private router:Router) { }
 
@@ -34,6 +35,11 @@ export class SignupComponent implements OnInit {
         resolve(res.json());
         resolve(this.router.navigateByUrl('/'))
       }, (err) => {
+        this.error = err;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        setTimeout(function () {
+          this.error = null;
+        }.bind(this), 3000);
         reject(err);
       })
     })
@@ -59,7 +65,7 @@ export class SignupComponent implements OnInit {
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     setTimeout(function () {
       this.success = false;
-    }.bind(this), 5000);
+    }.bind(this), 3000);
 
 
   }

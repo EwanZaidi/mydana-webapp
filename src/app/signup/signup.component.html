@@ -32,15 +32,18 @@
           <div *ngIf="success" class="alert alert-success">
             Thank you for register with <strong>My Prihatin !</strong> Please login.
           </div>
+          <div *ngIf="error" class="alert alert-danger">
+            Invalid email or password, please try again !
+          </div>
           <div class="form-login form-register tac">
             <h2>Daftar Masuk</h2>
           </div>
           <div class="col-md-5 col-sm-12 col-xs-12 tar">
             <div class="inline clearfix mt-10">
-              <button type="submit" value="Send Messager" class="btn-secondary">Continue With Facebook</button>
+              <button type="submit" value="Send Messager" class="btn-secondary">Log Masuk menggunakan Facebook</button>
             </div>
             <div class="inline clearfix">
-              <button type="submit" value="Send Messager" class="btn-secondary">Continue With Google Plus</button>
+              <button type="submit" value="Send Messager" class="btn-secondary">Log Masuk menggunakan Google Plus</button>
             </div>
           </div>
           <div class="col-md-2 col-sm-12 col-xs-12 tac">
@@ -49,13 +52,29 @@
           <div class="col-md-5 col-sm-12 col-xs-12 form-register tal">
             <form #loginForm="ngForm">
               <div class="field">
-                <input type="email" name="email" placeholder="Email" ngModel>
+                <input type="email" id="email" #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" required ngModel>
+                <div *ngIf="email.invalid && (email.dirty)">
+                  <div *ngIf="email.errors.required" style="color:red">
+                    Sila masukkan email
+                  </div>
+                  <div *ngIf="email.errors.pattern" style="color:red">
+                    Sila masukkan email dengan format yang betul. Contoh: foo@bar.com
+                  </div>
+                </div>
               </div>
               <div class="field">
-                <input type="password" name="password" placeholder="Password" ngModel>
+                <input type="password" id="password" #password="ngModel" name="password" minlength="8" placeholder="Kata laluan" ngModel required>
+                <div *ngIf="password.invalid && (password.dirty)">
+                  <div *ngIf="password.errors.required" style="color:red">
+                    Sila masukkan kata laluan anda.
+                  </div>
+                  <div *ngIf="password.errors.minlength" style="color:red">
+                    Kata laluan mestilah tidak kurang dari 8 askara.
+                  </div>
+                </div>
               </div>
               <div class="inline clearfix">
-                <button type="submit" (click)="login(loginForm)" class="btn-primary">Log in</button>
+                <button [disabled]="!loginForm.valid" type="submit" (click)="login(loginForm)" class="btn-primary">Daftar Masuk</button>
               </div>
             </form>
           </div>
@@ -68,10 +87,10 @@
           </div>
           <div class="col-md-5 col-sm-12 col-xs-12 tar">
             <div class="inline clearfix">
-              <button type="submit" value="Send Messager" class="btn-secondary">Continue With Facebook</button>
+              <button type="submit" value="Send Messager" class="btn-secondary">Log Masuk menggunakan Facebook</button>
             </div>
             <div class="inline clearfix">
-              <button type="submit" value="Send Messager" class="btn-secondary">Continue With Google Plus</button>
+              <button type="submit" value="Send Messager" class="btn-secondary">Log Masuk menggunakan Google Plus</button>
             </div>
           </div>
           <div class="col-md-2 col-sm-12 col-xs-12 tac">
@@ -80,16 +99,40 @@
           <div class="col-md-5 col-sm-12 col-xs-12 form-register tal">
             <form #registerForm="ngForm">
               <div class="field">
-                <input type="text" name="name" placeholder="Name" ngModel>
+                <input type="text" id="name2" #name2="ngModel" minlength="4" name="name" placeholder="Nama" ngModel required>
+                <div *ngIf="name2.invalid && (name2.dirty)">
+                  <div *ngIf="name2.errors.required" style="color:red">
+                    Sila masukkan nama anda.
+                  </div>
+                  <div *ngIf="name2.errors.minlength" style="color:red">
+                    Kata laluan mestilah tidak kurang dari 4 askara.
+                  </div>
+                </div>
               </div>
               <div class="field">
-                <input type="email" name="email" placeholder="Email" ngModel>
+                <input type="email" id="email2" #email2="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" ngModel required>
+                <div *ngIf="email2.invalid && (email2.dirty)">
+                  <div *ngIf="email2.errors.required" style="color:red">
+                    Sila masukkan email
+                  </div>
+                  <div *ngIf="email2.errors.pattern" style="color:red">
+                    Sila masukkan email dengan format yang betul. Contoh: foo@bar.com
+                  </div>
+                </div>
               </div>
               <div class="field">
-                <input type="password" name="password" placeholder="Password" ngModel>
+                <input type="password" id="password2" #password2="ngModel" name="password" minlength="8" placeholder="kata laluan" ngModel required>
+                <div *ngIf="password2.invalid && (password2.dirty)">
+                  <div *ngIf="password2.errors.required" style="color:red">
+                    Sila masukkan kata laluan anda.
+                  </div>
+                  <div *ngIf="password2.errors.minlength" style="color:red">
+                    Kata laluan mestilah tidak kurang dari 8 askara.
+                  </div>
+                </div>
               </div>
               <div class="inline clearfix">
-                <button type="submit" (click)="register(registerForm)" class="btn-primary">Register Account</button>
+                <button [disabled]="!registerForm.valid" type="submit" (click)="register(registerForm)" class="btn-primary">Daftar Akaun</button>
               </div>
             </form>
           </div>
@@ -107,7 +150,7 @@
           </h2>
         </div>
         <div style="margin-top:30px" class="col-md-2 col-sm-2 col-xs-2 hidden-sm hidden-xs text-center wow fadeInUp" data-wow-delay=".1s">
-          <i style="color:black" class="icon display-block fa fa-heartbeat fa-5x">
+          <i style="color:white" class="icon display-block fa fa-heartbeat fa-5x">
             
           </i>
         </div>
@@ -115,11 +158,10 @@
           <p class="lead">Sebarang pertanyaan boleh dikemukakan kepada Sekretariat kami melalui saluran dibawah:
             <br>
           </p>
-          <h4 class="mb8">
-            tel: 03 2858 7637
+          <h4><a href="tel:+60328587637" class="mb8">
+            tel: 03 2858 7637</a>
           </h4>
-          <h4 class="mb8">
-            email: admin@myprihatin.org.my
+          <h4><a href="mailto:admin@myprihatin.org.my" class="mb8">email: admin@myprihatin.org.my</a>
           </h4>
           <br>
           <h4 class="mb0">

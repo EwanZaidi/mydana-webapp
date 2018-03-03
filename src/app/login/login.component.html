@@ -60,21 +60,37 @@
         <div class="form-login" style="text-align:center">
           <h2>Daftar Masuk</h2>
           <div class="inline clearfix">
-            <button type="submit" value="Send Messager" class="btn-secondary">Login With Facebook</button>
+            <button type="submit" value="Send Messager" class="btn-secondary">Log Masuk Menggunakan Facebook</button>
           </div>
           <div class="inline clearfix">
-            <button type="submit" value="Send Messager" class="btn-secondary">Login With Google </button>
+            <button type="submit" value="Send Messager" class="btn-secondary">Log Masuk Menggunakan Google </button>
           </div>
           <h5>Atau</h5>
           <form #loginForm="ngForm">
             <div class="field">
-              <input type="email" name="email" placeholder="E-mail Address" ngModel>
+              <input type="email" id="email" name="email" placeholder="Email" ngModel #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div *ngIf="email.errors.required" style="color:red">
+                  Sila masukkan email
+                </div>
+                <div *ngIf="email.errors.pattern" style="color:red">
+                  Sila masukkan email dengan format yang betul. Contoh: foo@bar.com
+                </div>
+              </div>
             </div>
             <div class="field">
-              <input type="password" name="password" placeholder="Password" ngModel>
+              <input type="password" id="password" name="password" #password="ngModel" placeholder="Password" ngModel required minlength="8">
+              <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                <div *ngIf="password.errors.required" style="color:red">
+                  Sila masukkan kata laluan anda.
+                </div>
+                <div *ngIf="password.errors.minlength" style="color:red">
+                  Kata laluan mestilah tidak kurang dari 8 askara.
+                </div>
+              </div>
             </div>
             <div class="inline clearfix">
-              <button type="submit" class="btn-secondary" (click)="login(loginForm)">Login</button>
+              <button type="submit" class="btn-secondary" (click)="login(loginForm)">Log Masuk</button>
             </div>
           </form>
         </div>
@@ -92,19 +108,18 @@
           </h2>
         </div>
         <div style="margin-top:30px" class="col-md-2 col-sm-2 col-xs-2 hidden-sm hidden-xs text-center wow fadeInUp" data-wow-delay=".1s">
-          <i style="color:black" class="icon display-block fa fa-heartbeat fa-5x">
-
+          <i style="color:white" class="icon display-block fa fa-heartbeat fa-5x">
+            
           </i>
         </div>
         <div class="col-md-5 col-sm-5 wow fadeInUp" data-wow-delay=".1s">
           <p class="lead">Sebarang pertanyaan boleh dikemukakan kepada Sekretariat kami melalui saluran dibawah:
             <br>
           </p>
-          <h4 class="mb8">
-            tel: 03 2858 7637
+          <h4><a href="tel:+60328587637" class="mb8">
+            tel: 03 2858 7637</a>
           </h4>
-          <h4 class="mb8">
-            email: admin@myprihatin.org.my
+          <h4><a href="mailto:admin@myprihatin.org.my" class="mb8">email: admin@myprihatin.org.my</a>
           </h4>
           <br>
           <h4 class="mb0">
@@ -124,7 +139,6 @@
         </div>
       </div>
     </div>
-  </footer>
-  <!-- site-footer -->
+  </footer><!-- site-footer -->
 </div>
 <!-- #wrapper -->

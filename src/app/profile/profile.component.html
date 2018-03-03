@@ -34,7 +34,8 @@
     </section><!-- .top-site -->
       <div class="video">
         <div class="video-wrapper ple">
-          <span><img src="{{user.image}}" style="border-radius:50%"></span>
+          <span><img *ngIf="have_img" src="{{user.image}}" style="border-radius:50%">
+                <img *ngIf="!have_img" src="../../assets/images/no_image.ico" style="border-radius:50%"></span>
         </div>
       </div>
       <div class="video">
@@ -55,16 +56,19 @@
       <section class="team section" style="background:white">
         <div class="container mw" id="updates">
           <h2 class="title" style="color:black">Aktiviti</h2>
-          <ul>
+          <ul *ngIf="user.fund.length > 0">
             <li *ngFor="let f of user.fund">
               <p class="date" style="font-weight:bold">{{f.donation_date.date | date : 'dd MMM yyyy'}}</p>
               <div class="desc">
-                <p>Category: {{f.category}}</p>
-                <p>Campaign name: {{f.campaign_name}}</p>
-                <p>Fund Amount : RM {{f.amount}}</p>
+                <p>Kategori: {{f.category}}</p>
+                <p>Kempen: {{f.campaign_name}}</p>
+                <p>Jumlah Sumbangan : RM {{f.amount}}</p>
               </div>
             </li>
           </ul>
+          <div *ngIf="user.fund.length == 0" style="text-align:center">
+            <p>Tiada rekod sumbangan</p>
+          </div>
         </div>
       </section>
       <!-- .team -->
