@@ -23,6 +23,7 @@ export class CampaignComponent implements OnInit {
   rcent: Boolean = false;
   success : Boolean = false;
   can : Boolean = false;
+  have_img:Boolean = false;
 
   constructor(private http: Http, private router:Router, private route: ActivatedRoute) { 
     this.user = [];
@@ -36,6 +37,11 @@ export class CampaignComponent implements OnInit {
       new Promise((resolve, reject) => {
         this.http.get(this.baseUrl + 'users', {headers : header}).map(res => res.json()).subscribe(data => {
           this.user = data.data;
+          if(this.user.image == ""){
+            this.have_img = false;
+          }else{
+            this.have_img = true;
+          }
           resolve(data.data);
         }, (err) => {
           reject(err)
@@ -53,7 +59,7 @@ export class CampaignComponent implements OnInit {
       let calc;
       var oneDay = 24*60*60*1000;
 
-      var first = new Date(this.campaign.campaign_start_date);
+      var first = new Date();
       var sec = new Date(this.campaign.campaign_end_date);
       calc = (this.campaign.fund_amount / this.campaign.total_amount) * 100;
       this.campaign.percent = Math.round(calc);
@@ -62,8 +68,10 @@ export class CampaignComponent implements OnInit {
       this.campaign.campaign_comments.forEach(element => {
         element.RelativeDate = moment(element.created_at.date).fromNow();
       })
-      
+
+      console.log(this.campaign);
     })
+    
   }
 
   login(){

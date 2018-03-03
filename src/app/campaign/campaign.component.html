@@ -39,9 +39,14 @@
 							</li>
 						</ul>
 					</nav>
-					<div class="login login-button">
-						<a *ngIf="!logged" (click)="login()" class="btn-primary" style="cursor:pointer">Login</a>
-         				 <img *ngIf="logged" src="{{user.image}}" style="width:50px; height:50px; border-radius:50%; cursor:pointer" (click)="profile(user.user_id)">
+					<div *ngIf="!logged" class="login login-button">
+						<a (click)="login()" class="btn-primary" style="cursor:pointer">Login</a>
+					</div>
+					<!-- .login -->
+					<div *ngIf="logged" class="login login-button">
+						<img *ngIf="have_img" src="{{user.image}}" style="width:50px; height:50px; border-radius:50%; cursor:pointer" (click)="profile(user.user_id)">
+						<img *ngIf="!have_img" src="../../assets/images/no_image.ico" style="width:50px; height:50px; border-radius:50%; cursor:pointer"
+						 (click)="profile(user.user_id)">
 					</div>
 					<!-- .login -->
 				</div>
@@ -140,9 +145,7 @@
 									</li>
 								</ul>
 								<div class="campaign-content">
-									<div *ngIf="oview" id="campaign" class="tabs" [ngClass]="{active: oview}">
-										<p>{{campaign.description}}</p>
-									</div>
+									<div *ngIf="oview" id="campaign" class="tabs" [ngClass]="{active: oview}" innerHtml="{{campaign.description}}"></div>
 									<div *ngIf="rcent" id="updates" class="tabs" [ngClass]="{active: rcent}">
 										<ul *ngFor="let c of campaign.campaign_news">
 											<li>
@@ -197,47 +200,45 @@
 
 		<footer id="footer" class="bg-pink subscribe">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-5 col-sm-5 text-right text-left-xs wow fadeInUp" data-wow-delay=".1s">
-						<h2 class="fs50">
-							BERSAMA MEMBANTU MEREKA YANG MEMERLUKAN
-						</h2>
-					</div>
-					<div style="margin-top:30px" class="col-md-2 col-sm-2 col-xs-2 hidden-sm hidden-xs text-center wow fadeInUp" data-wow-delay=".1s">
-						<i style="color:black" class="icon display-block fa fa-heartbeat fa-5x">
-
-						</i>
-					</div>
-					<div class="col-md-5 col-sm-5 wow fadeInUp" data-wow-delay=".1s">
-						<p class="lead">Sebarang pertanyaan boleh dikemukakan kepada Sekretariat kami melalui saluran dibawah:
-							<br>
-						</p>
-						<h4 class="mb8">
-							tel: 03 2858 7637
-						</h4>
-						<h4 class="mb8">
-							email: admin@myprihatin.org.my
-						</h4>
-						<br>
-						<h4 class="mb0">
-							<a style="color:white" href="http://fb.com/yayasanmyprihatin">
-								<i class="fa fa-facebook-official">
-								</i>
-								YayasanMyPrihatin
-							</a>
-						</h4>
-						<h4 class="mb0">
-							<a style="color:white" href="http://instagram.com/yayasanmyprihatin">
-								<i class="fa fa-instagram">
-								</i>
-								@yayasanmyprihatin
-							</a>
-						</h4>
-					</div>
+			  <div class="row">
+				<div class="col-md-5 col-sm-5 text-right text-left-xs wow fadeInUp" data-wow-delay=".1s">
+				  <h2 class="fs50">
+					BERSAMA MEMBANTU MEREKA YANG MEMERLUKAN
+				  </h2>
 				</div>
+				<div style="margin-top:30px" class="col-md-2 col-sm-2 col-xs-2 hidden-sm hidden-xs text-center wow fadeInUp" data-wow-delay=".1s">
+				  <i style="color:white" class="icon display-block fa fa-heartbeat fa-5x">
+					
+				  </i>
+				</div>
+				<div class="col-md-5 col-sm-5 wow fadeInUp" data-wow-delay=".1s">
+				  <p class="lead">Sebarang pertanyaan boleh dikemukakan kepada Sekretariat kami melalui saluran dibawah:
+					<br>
+				  </p>
+				  <h4><a href="tel:+60328587637" class="mb8">
+					tel: 03 2858 7637</a>
+				  </h4>
+				  <h4><a href="mailto:admin@myprihatin.org.my" class="mb8">email: admin@myprihatin.org.my</a>
+				  </h4>
+				  <br>
+				  <h4 class="mb0">
+					<a style="color:white" href="http://fb.com/yayasanmyprihatin">
+					  <i class="fa fa-facebook-official">
+					  </i>
+					  YayasanMyPrihatin
+					</a>
+				  </h4>
+				  <h4 class="mb0">
+					<a style="color:white" href="http://instagram.com/yayasanmyprihatin">
+					  <i class="fa fa-instagram">
+					  </i>
+					  @yayasanmyprihatin
+					</a>
+				  </h4>
+				</div>
+			  </div>
 			</div>
-		</footer>
-		<!-- site-footer -->
+		  </footer><!-- site-footer -->
 	</div>
 	<!-- #wrapper -->
 	<!-- jQuery -->

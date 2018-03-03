@@ -21,15 +21,18 @@
             <li><a href="#">MAKLUMAT</a></li>
           </ul>
         </nav>
-        <div class="login login-button">
-          <a *ngIf="!logged" (click)="login()" class="btn-primary" style="cursor:pointer">Login</a>
-          <img *ngIf="logged" src="{{user.image}}" style="width:50px; height:50px; border-radius:50%; cursor:pointer" (click)="profile(user.user_id)">
+        <div *ngIf="!logged" class="login login-button">
+          <a (click)="login()" class="btn-primary" style="cursor:pointer">Login</a>
+        </div><!-- .login -->
+        <div *ngIf="logged" class="login login-button">
+          <img *ngIf="have_img" src="{{user.image}}" style="width:50px; height:50px; border-radius:50%; cursor:pointer" (click)="profile(user.user_id)">
+          <img *ngIf="!have_img" src="../../assets/images/no_image.ico" style="width:50px; height:50px; border-radius:50%; cursor:pointer" (click)="profile(user.user_id)">
         </div><!-- .login -->
       </div><!--. right-header -->
     </div><!-- .container -->
   </header><!-- .site-header -->
 
-  <main id="main" class="site-main">
+  <main id="main" class="site-main" style="padding-bottom:0px !important">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators indicators">
@@ -88,7 +91,7 @@
                   <div class="campaign-box">
                     <a (click)="showCampaign(c.campaign_id)" class="category">{{c.category}}</a>
                     <h3><a href="https://demo.themegoals.com/html/ideabox/campaign_detail.html">{{c.campaign_name}}</a></h3>
-                    <div class="campaign-description">{{c.description}}</div>
+                    <div class="campaign-description">{{c.short_desc}}</div>
                     <div class="process">
                       <div class="raised"><span [ngStyle]="c.mystyle"></span></div>
                       <div class="process-info">
@@ -120,7 +123,7 @@
               <div class="col-md-12 col-xs-12">
                 <div class="statics-item" style="background:none !important;color:white">
                   <div class="statics-item-desc" style="text-align:center">
-                    <p style="margin-bottom:0px">Yayasan MyPrihatin (prihatin) ialah sebuah organisasi bukan berorientasikan keuntungan dan telah diluluskan penubuhannya di bawah akta ................</p>
+                    <p style="margin-bottom:0px; font-size:px">Yayasan MyPrihatin (MYPRIHATIN), ialah sebuah organisasi bukan berorientasikan keuntungan dan telah diluluskan penubuhannya di bawah Akta Pemegang Amanah (Pemerbadanan) 1952 (Akta 258), Bahagian Hal Ehwal Undang-Undang, Jabatan Perdana Menteri (BHEUU, JPM) pada 4 April 2015.</p>
                   </div>
                 </div>
               </div>
@@ -139,7 +142,7 @@
             </div>
             <div class="col-md-7 mt150">
               <div class="row bblack pd10">
-                <h1 class="fs40">Applikasi my dana</h1><br>
+                <h1 class="fs40">Aplikasi MyDana</h1><br>
                 <p class="f20">Yayasan MyPrihatin memperkenalkan aplikasi mudah alih MyDana sebagai platform untuk orang ramai menyalurkan bantuan secara atas talian</p>	
               </div>
               <div class="row mt20" >
@@ -158,16 +161,16 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6">	
-              <h1 class="fs40 tcb">Get Fresh Update On Email</h1>
-              <p class="f20 tcb mt20">We'll never share your email address and you can opt out at any time, we promise</p>
+              <h1 class="fs40 tcb">Maklumat dari MyDana</h1>
+              <p class="f20 tcb mt20">Email anda tidak akan tersebar kepada mana-mana agensi lain, itu janji kami!</p>
             </div>
             <div class="col-md-6 mt111">
               <div class="row">
                 <div class="search tac">
                   <div class="search">
-                    <input placeholder="Your Email Address">
+                    <input placeholder="Alamat email anda">
                     <span class="fa fa-envelope-o"></span>
-                    <button class="btn-secondary bts">Subscribe</button>
+                    <button class="btn-secondary bts">Langgan</button>
                   </div>
                 </div>
               </div>
@@ -184,7 +187,7 @@
               </h2>
             </div>
             <div style="margin-top:30px" class="col-md-2 col-sm-2 col-xs-2 hidden-sm hidden-xs text-center wow fadeInUp" data-wow-delay=".1s">
-              <i style="color:black" class="icon display-block fa fa-heartbeat fa-5x">
+              <i style="color:white" class="icon display-block fa fa-heartbeat fa-5x">
                 
               </i>
             </div>
@@ -192,11 +195,10 @@
               <p class="lead">Sebarang pertanyaan boleh dikemukakan kepada Sekretariat kami melalui saluran dibawah:
                 <br>
               </p>
-              <h4 class="mb8">
-                tel: 03 2858 7637
+              <h4><a href="tel:+60328587637" class="mb8">
+                tel: 03 2858 7637</a>
               </h4>
-              <h4 class="mb8">
-                email: admin@myprihatin.org.my
+              <h4><a href="mailto:admin@myprihatin.org.my" class="mb8">email: admin@myprihatin.org.my</a>
               </h4>
               <br>
               <h4 class="mb0">
